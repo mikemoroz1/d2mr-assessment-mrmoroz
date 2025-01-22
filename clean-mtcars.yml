@@ -1,0 +1,54 @@
+..generic:
+  git2rdata: 0.4.1
+  optimize: yes
+  NA string: NA
+  hash: 64f13c2eea3cf050f1c3a270f13bf04ed82b835b
+  data_hash: e46faa2c3c46c3a0a59b939644f49f1199889cc8
+model:
+  class: character
+mpg:
+  class: numeric
+cyl:
+  class: numeric
+disp:
+  class: numeric
+hp:
+  class: numeric
+drat:
+  class: numeric
+wt:
+  class: numeric
+qsec:
+  class: numeric
+vs:
+  class: numeric
+am:
+  class: numeric
+gear:
+  class: numeric
+carb:
+  class: character
+mpg_category:
+  class: factor
+  labels:
+  - low
+  - medium
+  - high
+  index:
+  - 1
+  - 2
+  - 3
+  ordered: yes
+wt_category:
+  class: factor
+  labels:
+  - heavy
+  - medium
+  - light
+  index:
+  - 1
+  - 2
+  - 3
+  ordered: yes
+mpg_per_cyl:
+  class: numeric
