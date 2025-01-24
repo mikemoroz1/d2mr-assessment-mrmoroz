@@ -12,13 +12,12 @@ You may additionally or alternatively complete the [Level 2 Data Cleaning assign
 
 # Instructions
 
-1. If you have not already done so, pull the latest changes from the `d2mr-assignments` repository to ensure you have the most up-to-date version of the assignment files. Confirm you are working in your fork of the repository.
-2. Open `cleaning-level-1.qmd` in RStudio and follow the instructions in the Setup section below to load and inspect the (clean) `goal.mtcars` dataset. 
-    - **Important:** The provided code makes a small modification to the original `mtcars` dataset to create a `goal.mtcars` dataset. You will use this goal dataset as a reference to clean the `messy-mtcars.csv` dataset, not the true original.
-3. Follow the tasks described in the assignment script to clean the dataset and return it to its original state.
-4. At several points in this document you will come across questions or non-coding exercises. Answer these questions in the text of this .qmd document, immediately below the question.
-5. *Optional:* Continue to follow the instructions in the assignment script to clean the dataset above and beyond matching the original. 
-
+1.  If you have not already done so, pull the latest changes from the `d2mr-assignments` repository to ensure you have the most up-to-date version of the assignment files. Confirm you are working in your fork of the repository.
+2.  Open `cleaning-level-1.qmd` in RStudio and follow the instructions in the Setup section below to load and inspect the (clean) `goal.mtcars` dataset.
+    -   **Important:** The provided code makes a small modification to the original `mtcars` dataset to create a `goal.mtcars` dataset. You will use this goal dataset as a reference to clean the `messy-mtcars.csv` dataset, not the true original.
+3.  Follow the tasks described in the assignment script to clean the dataset and return it to its original state.
+4.  At several points in this document you will come across questions or non-coding exercises. Answer these questions in the text of this .qmd document, immediately below the question.
+5.  *Optional:* Continue to follow the instructions in the assignment script to clean the dataset above and beyond matching the original.
 
 ### Tasks
 
@@ -26,13 +25,13 @@ You may additionally or alternatively complete the [Level 2 Data Cleaning assign
 
 [^1]: Why? The `mtcars` dataset includes models names as *row names* rather than as a variable/column. For the purposes of this cleaning exercise, it's more useful to treat model names as a variable.
 
-1. **Renaming Columns:** Rename columns to match the original `mtcars` dataset column names.
-2. **Reordering Columns:** Ensure the columns are in the correct order.
-3. **Sorting Rows:** Sort the rows by `mpg` (miles per gallon) and then by `cyl` (number of cylinders).
-4. **Changing Data Types:** Ensure `gear` and `carb` are factors and other columns are numeric.
-5. **Mutating Data:** Create a new column `hp_per_cyl` calculated as `hp` (horsepower) divided by `cyl`.
-6. **String Manipulation:** Use `stringr` to clean any unwanted spaces or characters in the `model` column.
-7. **Handling Factors:** Use `forcats` to ensure the levels of `gear` are ordered as `3`, `4`, `5`.
+1.  **Renaming Columns:** Rename columns to match the original `mtcars` dataset column names.
+2.  **Reordering Columns:** Ensure the columns are in the correct order.
+3.  **Sorting Rows:** Sort the rows by `mpg` (miles per gallon) and then by `cyl` (number of cylinders).
+4.  **Changing Data Types:** Ensure `gear` and `carb` are factors and other columns are numeric.
+5.  **Mutating Data:** Create a new column `hp_per_cyl` calculated as `hp` (horsepower) divided by `cyl`.
+6.  **String Manipulation:** Use `stringr` to clean any unwanted spaces or characters in the `model` column.
+7.  **Handling Factors:** Use `forcats` to ensure the levels of `gear` are ordered as `3`, `4`, `5`.
 
 # Setup
 
@@ -43,7 +42,6 @@ You may additionally or alternatively complete the [Level 2 Data Cleaning assign
 library(tidyverse)
 set.seed(1234)
 ```
-
 
 ## Read in and inspect messy data
 
@@ -85,29 +83,26 @@ goal.mtcars <- mtcars %>%
   rownames_to_column(var = "model")
 
 # Inspect the goal.mtcars dataset
-head(goal.mtcars)
+# head(goal.mtcars)
 
 # Optionally inspect the original mtcars dataset to see what the row names vs column issue looks like
-# head(mtcars)
+head(mtcars)
 
 ```
 
-
 QUESTIONS:
 
-1. What are the differences between the messy dataset and the original mtcars dataset?
+1.  What are the differences between the messy dataset and the original mtcars dataset?
 
-<!-- answer below -->
+The messy dataset has a car model column, has (Miles/Gallon) listed with mpg, and generally has longer column names like using "cylinders" vs "cyl" and "horsepower" vs "hp". The messy dataset also has "wt + runif(n(), 2e-05, 2e-04)" and "hp_per_cyl" as column names that are not included in the original mtcars dataset. Some of the columns also have different data types, with float/numeric data "<dbl>" being common in the original mtcars dataset, and character data "<chr>" being common in the messy.mtcars dataset. The original mtcars dataset also rounds the data to easier-to-read decimal points, whereas the messy.data does not and keeps the values in their full-length decimal points. We also have to abbreviate the messy.mtcars column names so they properly match the goal.mtcars column names. Finally, there is missing data in the cylinders and horsepower columns for the messy dataset.
 
-2. What are the main issues you need to address in cleaning?
+2.  What are the main issues you need to address in cleaning?
 
-<!-- answer below -->
-
-
+To get the messy.mtcars dataset to look like the goal.mtcars dataset, we have to drop the "wt + runif(n(), 2e-05, 2e-04)" and "hp_per_cyl" columns from the messy.mtcars dataset. We also need to label the car model column, and number the rows of each observation from 1 to 6 because there are six total cars in the dataset. Then we need to change the messy.mtcars' dataset columns from character "<chr>" to float/numeric data "<dbl>". We also need to remove (Miles/Gallon) from the mpg column title/header, and fix the decimal rounding in each column so it matches the goal.mtcars dataset. Finally, we have to fill in the missing values for the cylinder and horsepower columns to properly match the goal.mtcars dataset.
 
 # Clean the Dataset
 
-## Creat "clean" dataset
+## Create "clean" dataset
 
 ```{r}
 
@@ -115,12 +110,12 @@ QUESTIONS:
 
 # Create a dataset to work with during the cleaning process called "clean.mtcars"
 
+clean.mtcars <- messy.mtcars
+head(clean.mtcars)
 
 ```
 
-
 ## Clean columns/variables
-
 
 ```{r}
 
@@ -128,6 +123,11 @@ QUESTIONS:
 
 # Rename columns to match the original mtcars dataset
 
+clean.mtcars <- messy.mtcars %>%
+  rename(mpg=`mpg (Miles/Gallon)`, cyl = cylinders, hp = horsepower, gear = gearbox, carb = carburetors, disp = dsip) %>%
+  column_to_rownames(" Car Model")
+
+head(clean.mtcars)
 
 ```
 
@@ -137,6 +137,15 @@ QUESTIONS:
 
 # Reorder columns to match the original mtcars dataset
 
+clean.mtcars <- clean.mtcars %>% relocate(disp, .after = cyl)
+head(clean.mtcars)
+
+# Checking for equal columns. Not equal yet because I still have to drop two columns. 
+# I assume we will be asked to drop them in the future. 
+
+all.equal(colnames(clean.mtcars), colnames(mtcars))
+
+### Not equal yet because I haven't dropped the columns. 
 
 ```
 
@@ -145,6 +154,11 @@ QUESTIONS:
 #| label: correct-data-types
 
 # Correct variable data types
+
+clean.mtcars <- clean.mtcars %>%
+  mutate(mpg = as.numeric(mpg), cyl = as.numeric(cyl), disp = as.numeric(disp), hp = as.numeric(hp), drat = as.numeric(drat), wt = as.numeric(wt), qsec = as.numeric(qsec), vs = as.numeric(vs), am = as.numeric(am), gear = as.numeric(gear), carb = as.numeric(carb))
+
+head(clean.mtcars)
 
 ```
 
@@ -156,33 +170,38 @@ QUESTIONS:
 
 # Inspect the current state of the dataset
 
+head(clean.mtcars)
+
 # Use all.equal() to check if clean.mtcars matches goal.mtcars
+
+all.equal(clean.mtcars, goal.mtcars)
 
 ```
 
 Questions:
 
-3. The current state of the dataset does not yet match the `goal.mtcars` dataset. Explain the issues that `all.equal()` flags.  Are there groups of issues that can be addressed together?
+3.  The current state of the dataset does not yet match the `goal.mtcars` dataset. Explain the issues that `all.equal()` flags. Are there groups of issues that can be addressed together?
 
-<!-- answer below -->
+Most of the flags refer to the unaddressed inconsistencies I mentioned before. For example, my clean.mtcars dataset still has two more columns than the goal.mtcars dataset, which will need to be dropped. Furthermore, my current clean.mtcars dataset has car model listed as a row with no column, whereas goal.mtcars has model as a column. Other than that, there are also rounding issues with some of the columns and their values which makes the means appear to be different, and there are also elements of missing data that will need to be addressed. Finally, the last issue I see is that some of the columns are still "characters" instead of being "numeric" in the clean.mtcars dataset, but those are the columns that need to be dropped anyways so I did not change them earlier.
 
-3. Install (if necessary) and load the `daff` package. In the code chunk below, use the `diff_data()` function to identify the differences between `clean.mtcars` and `goal.mtcars`. 
+3.  Install (if necessary) and load the `daff` package. In the code chunk below, use the `diff_data()` function to identify the differences between `clean.mtcars` and `goal.mtcars`.
 
 ```{r}
 #| label: diff-data
 
 # Install and/or load the daff package if needed
-# install.package("daff")
-# library(daff)
+install.packages("daff")
+library(daff)
 
 # Use render_diff() and diff_data() to identify differences between clean.mtcars and goal.mtcars
 
+render_diff(diff_data(clean.mtcars, goal.mtcars))
 
 ```
 
 How is this method of identifying data discrepancies different from `all.equal()`? Which do you find more helpful at this point?
 
-<!-- answer below -->
+Using the render_diff function is way easier to identify data discrepancies than using all.equal(). The render_diff function creates a nice table that is simple and easy to read. I find the render_diff function to be more helpful than the all.equal() line of code.
 
 ## Clean data values
 
@@ -190,19 +209,21 @@ Identifying specific value problems and cleaning them might take a little creati
 
 ```{r}
 
-#| label: remove-unwanted-spaces
-
-# Remove unwanted whitespace in any columns required
-
-
-```
-
-```{r}
-
 #| label: impute-missing-values
 
 # Impute missing values for cyl and hp
 
+clean.mtcars$cyl[15] = 8
+clean.mtcars$cyl[30] = 6
+
+clean.mtcars$hp[9] = 95
+clean.mtcars$hp[18] = 66
+clean.mtcars$hp[27] = 91
+
+### Checking my results
+
+library(daff)
+render_diff(diff_data(clean.mtcars, goal.mtcars))
 ```
 
 ```{r}
@@ -211,6 +232,29 @@ Identifying specific value problems and cleaning them might take a little creati
 
 # Round numeric values
 
+clean.mtcars <- clean.mtcars %>%
+  mutate(disp = round(disp, 1), drat = round(drat, 2), qsec = round(qsec, 2))
+
+library(daff)
+render_diff(diff_data(clean.mtcars, goal.mtcars))
+
+### Everything looks good. Now I just need to fix the model column so that it's a column again. 
+
+```
+
+```{r}
+
+#| label: Adding 'model' back as a column name.
+
+### I have to add model back as a column name first so I'm going to do this a little differently. 
+
+clean.mtcars = clean.mtcars %>% rownames_to_column(var = "model")
+
+head(clean.mtcars)
+
+library(daff)
+render_diff(diff_data(clean.mtcars, goal.mtcars))
+
 ```
 
 ```{r}
@@ -218,21 +262,39 @@ Identifying specific value problems and cleaning them might take a little creati
 #| label: fix-typos
 
 # Fix typos in model names
+# Remove unwanted whitespace in any columns required
 ## Hint: This can be completed with a 6-line mutate() statement
+### For some reason I couldn't reduce it to less than the 9 lines I have below. 
 
+clean.mtcars <- clean.mtcars %>%
+  mutate(
+    model = str_squish(model),
+    model = str_replace_all(model, "SportAbout", "Sportabout"),
+    model = str_replace_all(model, "CAdillac", "Cadillac"),
+    model = str_replace_all(model, "ToyotA|T0yota", "Toyota"),
+    model = str_replace_all(model, "L0tus", "Lotus"),
+    model = str_replace_all(model, "FerrAri", "Ferrari"),
+    model = str_replace_all(model, "PontiAc", "Pontiac")
+  )
 
-
+library(daff)
+render_diff(diff_data(clean.mtcars, goal.mtcars))
 ```
 
 ```{r}
 
 #| label: remove-extra-column
 
-# Remove the extra column
+# Remove the extra columns
 
+clean.mtcars = clean.mtcars %>% select(-c("wt + runif(n(), 2e-05, 2e-04)", hp_per_cyl))
+
+head(clean.mtcars)
+
+library(daff)
+render_diff(diff_data(clean.mtcars, goal.mtcars))
 
 ```
-
 
 ## Checkpoint 2
 
@@ -243,52 +305,304 @@ Identifying specific value problems and cleaning them might take a little creati
 
 # all.equal()
 
+all.equal(clean.mtcars, goal.mtcars)
+
 # daff
 
+library(daff)
+render_diff(diff_data(clean.mtcars, goal.mtcars))
+
+### Both are equal. Output = True and the data frames line up perfectly with each other (even if I used a bit of an unconventional method to get to this point!)
+
+# Testing a logical operator to compare values across index position 1 between 'mpg' columns of each data set. 
+
+logical = clean.mtcars$mpg[1]|goal.mtcars$mpg[1]
+print(logical)
 ```
 
 Questions:
 
-5. Is your dataset identical to `goal.mtcars`? If not, what are the remaining issues? If there were any issues you could not resolve in code, describe a proposed solution in plain English.
+5.  Is your dataset identical to `goal.mtcars`? If not, what are the remaining issues? If there were any issues you could not resolve in code, describe a proposed solution in plain English.
 
-<!-- answer below -->
-
+My clean.mtcars dataset is identical to goal.mtcars, so everything worked out quite well. I found I had to use a bit of a different order/process compared to the outline, but everything worked out quite well! Mostly this was due to me not having made model a column earlier, and if I did that earlier in my code I could've followed the outline perfectly. Nevertheless, I am happy with how everything turned out and I got clean.mtcars to look like goal.mtcars, which is what it's supposed to look like!
 
 # Optional Cleaning Tasks
 
-You can call it a day here, or continue with the optional cleaning tasks below. These tasks are a chance to challenge yourself and practice your skills further. They are also additional opportunities to demonstrate mastery of course standards! 
-
+You can call it a day here, or continue with the optional cleaning tasks below. These tasks are a chance to challenge yourself and practice your skills further. They are also additional opportunities to demonstrate mastery of course standards!
 
 ## Additional guided cleaning
 
 *Optional:* Complete any number of the following tasks to further clean the dataset. Each task should be in its own code chunk with an appropriate label and clearly commented code:
 
-1. Create a new factor column `mpg_category` that categorizes `mpg` into "low", "medium", and "high" based on the distribution of `mpg` values.
-2. Create a new factor column `wt_category` that categorizes `wt` into "light", "medium", and "heavy" based on the distribution of `wt` values, then reverse the order of the levels.
-3. Create a new column `mpg_per_cyl` that calculates `mpg` divided by `cyl`.
-4. Filter the data to only include cars with automatic transmissions. (Hint: `?mtcars` will show you useful info.)
-5. Identify which variable would be better suited as a logical variable, then convert it to logical.
-6. Sort the dataset by `mpg_category` then reverse alphabetically by `model` (so that models with the same `mpg_category` are sorted Z to A).
-7. Write the cleaned dataset as a csv file called `clean-mtcars.csv`, then read the csv back in maintaining the correct data types.
+1.  Create a new factor column `mpg_category` that categorizes `mpg` into "low", "medium", and "high" based on the distribution of `mpg` values.
 
+```{r}
+
+#| label: Additional Task #1: 'mpg_category'
+
+# Making 'mpg_category'
+
+### First checking to see the distribution of 'mpg' values using ggplot2
+#### Code reference: https://pyoflife.com/creating-a-normal-distribution-plot-using-ggplot2-in-r/#google_vignette
+
+##### ?ggplot2
+##### install.packages("ggplot2")
+library(ggplot2)
+
+ggplot(clean.mtcars, aes(x = mpg)) + geom_histogram(binwidth = 1.5, color = "darkgreen", fill = "lightgreen") + labs(x = "Miles per Gallon (mpg)", y = "Number of Cars", title = "Miles per Gallon Histogram") + theme(plot.title = element_text(hjust = 0.5))
+
+#### The histogram distribution tells me a bit (it's positively skewed using 1.5 mpg binwidths), but I'm going to do a second check by making three cutoff bins and checking those distributions. The work is not done yet! And I'm also going to keep using ggplot because it's my favourite thing in R.
+
+binned_mpg = cut_interval(clean.mtcars$mpg, n = 3)
+print(binned_mpg)
+
+# Parse and define conditional statement (below)
+#### Ok this second piece of info tells me a bit more than the first. This code looks at all the values in mpg and cuts it into three different categories depending on the distribution of the data. The cutoffs are as follows: < 18.2 = low, > 18.2 but < 26.1 = medium, > 26.1 = high). Time to do that in the code to modify my data frame. 
+
+## Using an if/else loop to make a new column categorizing the data
+#### Code reference: https://stackoverflow.com/questions/67943039/apply-if-else-condition-to-make-new-column-in-r
+
+clean.mtcars$mpg_category <- with(clean.mtcars, ifelse(mpg < 18.2, "low", ifelse(mpg < 26.1, "medium", "high")))
+
+print(clean.mtcars)
+
+#### Okay everything seemed to work out. If a car's mpg is < 18.2, it now has low mpg in the 'mpg_category' column. If a car's mpg is > 18.2 but < 26.1, it now has medium mpg in the 'mpg_category' column. Finally, if a car's mpg is > 26.1, it now has high mpg in the 'mpg_category' column. This is just one potential way to group/classify the data, but I am happy with how everything turned out! 
+```
+
+2.  Create a new factor column `wt_category` that categorizes `wt` into "light", "medium", and "heavy" based on the distribution of `wt` values, then reverse the order of the levels.
+
+```{r}
+
+#| label: Additional Task #2: 'wt_category'
+
+# I'm going to follow a similar version of the steps/processes I used before, with some slight modifications so I can try to hit more objective criteria. But I'm not exactly sure what the second part of the code is asking - reverse the order of the levels? Does this mean do that within the data frame's corresponding column using the reverse function? I think that's what it means, so I will do that and sort the data frame in descending order. 
+
+# Loading packages
+
+library(ggplot2)
+
+ggplot(clean.mtcars, aes(x = wt)) + geom_histogram(binwidth = 0.5, color = "darkblue", fill = "lightblue") + labs(x = "Car Weight (binwidth = 0.5)", y = "Number of Cars", title = "Car Weight Histogram") + theme(plot.title = element_text(hjust = 0.5))
+
+### Looking at the distribution, using binwidths of 0.5 makes the data appear to fit that of a normal distribution. There are obviously other techniques/modifications I can make to this plot, but it gives me a good sense of how the data is distributed. I want more information so I'm going to get summary/descriptive statistics that will better inform me of the data's distribution. 
+
+# Calculating descriptive statistics. These are just some of the common descriptives I have been told to calculate in the past, so I'm using that as my basic framework here. Most of them won't be important, but they could be informative! 
+
+# These lines each provide a different piece of data that could be informative about the data's distribution. I normally use summary() but wanted to show individual lines below. 
+
+wt_mean = mean(clean.mtcars$wt)
+wt_sd = sd(clean.mtcars$wt)
+wt_var = var(clean.mtcars$wt)
+wt_min = min(clean.mtcars$wt)
+wt_max = max(clean.mtcars$wt)
+wt_median = median(clean.mtcars$wt)
+wt_lbq = quantile(clean.mtcars$wt, 0.25)
+wt_ubq = quantile(clean.mtcars$wt, 0.75)
+wt_iqr = IQR(clean.mtcars$wt)
+
+# Using summary is just more efficient and what I normally use, but I wanted to show that I know how to look for individual descriptives (if necessary)
+summary(clean.mtcars$wt)
+
+#### Ok so for my sorting bounds: +/- 1 standard deviation from the mean will suffice (because the mean and median are quite close). -1 standard deviation from the mean will represent the "light" category, and 1 standard deviation above the mean will represent the "heavy" category. Everything else will fall in the medium category. This is just another way to look at and represent the data. 
+
+lower_bound = (wt_mean - wt_sd)
+upper_bound = (wt_mean + wt_sd)
+
+# Going to do this using a similar ifelse statement I used before because it's easier than typing everything in manually (and definitely more efficient!). Code is referenced in the above chunk (if needed). I'm not sure if you want us to reference code sources like StackOverflow, but I do it because it's a helpful practice for me as a coder when analyzing data. 
+
+clean.mtcars$wt_category <- with(clean.mtcars, ifelse(wt < lower_bound, "light", ifelse(wt < upper_bound, "medium", "heavy")))
+
+print(clean.mtcars)
+
+# Ok everything worked out. Now I need to sort the data frame in descending order, and I can do this using the rev() function or the order function. I went googling and I like the order function so I'm going to use that. Attached is the code reference: https://www.datacamp.com/doc/r/sorting# 
+
+# First I need to make the proper weights. Then I need to add the rest of the code. 
+
+clean.mtcars$wt_category <- factor(clean.mtcars$wt_category, levels = c("heavy", "medium", "light"), ordered = TRUE)
+
+attach(clean.mtcars)
+
+reversed_weight = clean.mtcars[order(wt_category),]
+
+# Or a better alternative (and my preferred alternative) would be:
+
+# reversed_weight = clean.mtcars[order(-wt),]
+
+print(reversed_weight)
+
+detach(clean.mtcars)
+
+# Now everything is sorted in descending leveled order from "heavy" to "medium" to "light" in the "reversed_weight" data set. I think a better method would be to sort by descending weight, as the current iteration of the code doesn't take actual weight into account, but that's alright. I think I did what you are asking!
+
+# Showcasing chunk options
+
+```
+
+3.  Create a new column `mpg_per_cyl` that calculates `mpg` divided by `cyl`.
+
+```{r}
+
+#| label: Additional Task #3: 'mpg_per_cyl'
+
+# This will be relatively straightforward. I just have to make a column that takes 'mpg' and divides it by 'cyl' for each row. I will do that now.
+
+# Example of arithmetic operator
+
+clean.mtcars$mpg_per_cyl <- (clean.mtcars$mpg / clean.mtcars$cyl)
+
+# Everything worked! It took each car's 'mpg' value, divided it by its 'cyl' value, and added it to the newly-made 'mpg_per_cyl' column. Pretty simple and straightforward. 
+
+```
+
+4.  Filter the data to only include cars with automatic transmissions. (Hint: `?mtcars` will show you useful info.)
+
+```{r}
+
+#| label: Additional Task #4: 'Automatic Transmissions'
+
+?mtcars
+
+# From the above line of code, I see the 'am' column corresponds to whether a car has an automatic or manual transmission. 0 is coded as automatic, so I only want rows with 0 in the 'am' column to be included in my new data set. 
+
+# Now I just need to select for those values, which I will do in the code below using subset() Code reference: https://www.r-bloggers.com/2024/06/remove-rows-from-dataframe-based-on-condition-in-r/#:~:text=To%20remove%20rows%2C%20use%20a,indices%20you%20want%20to%20exclude.&text=In%20this%20code%20snippet%2C%20we,their%20positions%20within%20negative%20brackets.
+
+automatic_mtcars <- subset(clean.mtcars, am == 0)
+
+print(automatic_mtcars)
+
+# Everything looks good. Now the only cars in the newly created 'automatic_mtcars' data set have am = 0 as one of their values. 
+
+```
+
+5.  Identify which variable would be better suited as a logical variable, then convert it to logical.
+
+```{r}
+
+#| label: Additional Task #5: 'Logical Variable'
+
+# I think this question is pretty open-ended because it's simply a matter of preference. For this question I'm going to pick the 'carb' variable and turn it into a logical variable. On the basis of my conversion: Are there more than 3 carburetors? 1 = Yes, 0 = No. I will do that now in my code below. 
+
+# Example of comparison operator
+# Then this is also another example of a conditional statement. 
+
+clean.mtcars$carb <- with(clean.mtcars, ifelse(carb <= 3, 0, ifelse(carb > 3, 1, "NA")))
+clean.mtcars$carb = as.numeric(mtcars$carb)
+
+print(clean.mtcars)
+
+# It worked! I used an ifelse statement again because I thought it was the most convenient. If carb <= 3, it becomes a 0 which means no, the car does not have more than 3 carburetors. If carb > 3, it becomes a 1 which means yes, the car does have more than 3 carburetors. Then I just had to assign an "NA" to handle all other cases (which is not used regardless). It worked out quite well. 
+  
+```
+
+6.  Sort the dataset by `mpg_category` then reverse alphabetically by `model` (so that models with the same `mpg_category` are sorted Z to A).
+
+```{r}
+
+#| label: Additional Task #6: 'Reverse Alphabetically'
+
+# This can be done using a similar version of the steps I completed above (a couple code chunks ago). The code reference is attached in that initial code chunk, but this time I'm going to use the -rank function because it is easy to use to reverse sort the alphabet.
+
+clean.mtcars$mpg_category <- factor(clean.mtcars$mpg_category, levels = c("low", "medium", "high"), ordered = TRUE)
+
+reverse_alphabetical = clean.mtcars[order(clean.mtcars$mpg_category, -rank(clean.mtcars$model)), ]
+
+head(reverse_alphabetical)
+
+# Everything appears to have worked out. I had to use -rank to order the model column in reverse alphabetical order because decreasing = TRUE did not work. Everything looks in order in the reverse_alphabetical data set.
+
+```
+
+7.  Write the cleaned dataset as a csv file called `clean-mtcars.csv`, then read the csv back in maintaining the correct data types.
+
+```{r}
+
+#| label: Additional Task #7: 'Exporting to csv'
+
+# Converting everything using the readr package.
+
+library(readr)
+
+write_csv(clean.mtcars, "/Users/michaelmoroz/Desktop/clean-mtcars.csv")
+
+csv_read = read_csv("/Users/michaelmoroz/Desktop/clean-mtcars.csv")
+
+head(csv_read)
+head(clean.mtcars)
+
+# Everything worked out! A minor hiccup is that two columns (which I created as ordinal character variables in additional questions #1 and #2) didn't save the ordinal specification and are just considered as 'character' variables in the new data set, but that's fine. I did a bit of googling and they won't match unless I re-specify my ordered preference,  but since they are both character variables across both data sets I think it's fine (the data structure didn't change, just its rank order). I can fix this with one line of code, but I think the nature of this question is making sure all your data translates properly. It did that for me here. I could've also just made a new data set for the additional questions but I decided to keep modifying the old one. If I made a new data set for each additional question, I wouldn't have run into this minor hiccup. But I'm happy with how everything turned out! 
+
+```
 
 ## Unguided cleaning and transformation
 
 *Optional:* If you have the time and interest, continue transforming this dataset as you please. Create new columns based on the existing ones, reformat strings, try your hand at a regex replacement, summarize by groups (factor levels), visualize a simple relationship, or anything else you can think of. You can do this in addition to or instead of the suggested additional cleaning tasks above.
+
+```{r}
+
+#| label: Unguided Cleaning #1: 'forcats and more plots'
+
+# Now I'm going to use the forcats package to do some additional data manipulation, then I'm going to make a two-variable plot (because I've already made some one-variable plots before) so I can check off two more objectives. 
+
+# First I'm going to create a new data frame
+
+unguided_data = clean.mtcars
+# head(unguided_data)
+
+# Now I'm going to use the forcats package to make some data modifications
+# Code reference: https://forcats.tidyverse.org 
+
+unguided_data$mpg_category = fct_lump_n(unguided_data$mpg_category, n = 2)
+print(unguided_data)
+
+# Ok everything worked out. I used the forcats package to lump all the 'high' values from the 'mpg_category' variable into "Other", based on wanting to make two groups of the most common frequencies between "low", "medium", and "high" values. I like forcats because it is fun to use for data manipulation.
+
+# Summary/descriptives for this factor data:
+
+summary(unguided_data$mpg_category)
+
+# It won't calculate averages because the column is a character column; it just returns what values are present in the data set and how many there are. But if I want averages for 'mpg' I can simply do that, which I will do below:
+
+summary(unguided_data$mpg)
+
+# This is a bit more informative. Basing this interpretation on the median and mean 'mpg', most cars in this data set are at or near around 20 miles per gallon. 
+
+# Moving ahead - going to make some two variable plots now with ggplot2. 
+
+library(ggplot2)
+
+ggplot(unguided_data, aes(x = mpg, y = wt)) + geom_line(na.rm = FALSE, show.legend = TRUE, color = "black") + labs(x = "Miles per Gallon (mpg)", y = "Car Weight (wt)", title = "Comparison Plot between Miles per Gallon (mpg) and Car Weight (wt)") + theme(plot.title = element_text(hjust = 0.5)) + geom_point()
+
+# I like this plot even though it's not the most informative. It shows a general trend: the heavier the car, the lower its rate of miles per gallon. This is a fun way to represent some of the data with a two-variable line plot, where each point on the line represents a different car. This is a good way to visualize the relationship between two different data points (and their corresponding measurement systems) so I can better understand the overarching relationship between each category. It is quite fun!
+
+```
+```{r}
+
+#| label: Unguided Cleaning #2: 'Simple Hypothesis Testing and Presenting/Interpreting Statistics in a Manuscript Narrative '
+
+# Ok now I'm going to do some simple hypothesis testing
+
+# Hypothesis: Mazda car models have higher miles per gallon than Merc car models
+# Null Hypothesis: Mazda car models do not have higher miles per gallon than Merc car models
+
+# To test this hypothesis, I need to calculate the mean miles per gallon for each car model, then do a t-test of the comparison between both group means. I might not have a strong enough sample size to detect any effects. Regardless, I will try to detect any difference below: 
+
+mazda_mpg_mean = mean(unguided_data$model[])
+
+
+
+
+```
 
 
 # Submission & Assessment
 
 To submit:
 
-1. Modify the `assessment.md` in this mini-project's directory:
-    1. Check off all objectives you believe you have demonstrated
-    2. Indicate which objectives you are meeting for the first time (if any)
-    3. Complete any relevant open-ended items
-2. Push your changes to your centralized assignment repository on GitHub. 
-3. Confirm that Dr. Dowling nad your section TA are added as collaborators to your repository.
-4. Submit your work in your next open mini-project assignment by including the following information in the text box:
-    1. The title of the assignment: "Assignment: Clean the mtcars Dataset (Level 1)"
-    2. A link to the **directory** for this assignment in your centralized assignment repo
-
-
+1.  Modify the `assessment.md` in this mini-project's directory:
+    1.  Check off all objectives you believe you have demonstrated
+    2.  Indicate which objectives you are meeting for the first time (if any)
+    3.  Complete any relevant open-ended items
+2.  Push your changes to your centralized assignment repository on GitHub.
+3.  Confirm that Dr. Dowling nad your section TA are added as collaborators to your repository.
+4.  Submit your work in your next open mini-project assignment by including the following information in the text box:
+    1.  The title of the assignment: "Assignment: Clean the mtcars Dataset (Level 1)"
+    2.  A link to the **directory** for this assignment in your centralized assignment repo
