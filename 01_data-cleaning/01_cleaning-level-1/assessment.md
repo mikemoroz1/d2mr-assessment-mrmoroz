@@ -41,58 +41,58 @@ Suggested standards for this **Cleaning Level 1** assessment are noted with an a
 ### R programming
 
 5.  find, install, require, and load R packages
+    -   [x] Assessment attempt
+    -   [ ] Standard met
+6.  use R arithmetic, comparison, and logical operators
+    -   [x] Assessment attempt
+    -   [ ] Standard met
+7.  parse and define functions and arguments
     -   [ ] Assessment attempt
     -   [ ] Standard met
-6.  parse and define functions and arguments
-    -   [ ] Assessment attempt
-    -   [ ] Standard met
-7.  parse and write conditional statements
-    -   [ ] Assessment attempt
+8.  parse and write conditional statements
+    -   [x] Assessment attempt
     -   [ ] Standard met
 
 ### Tidyverse
 
 9.  **use `readr` functions to read in and write out data**
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 10. use `dplyr` and `tidyr` functions to transform data
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 11. use `stringr` functions to work with string variables
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 12. use `forcats` functions to work with factor variables
-    -   [ ] Assessment attempt
-    -   [ ] Standard met
-13. 
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 
 ### Data visualization with ggplot2
 
 13. produce 1- and 2-variable plots with `geom_*` layers
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 14. use dynamic aesthetics to group data
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 15. use facets to create parallel plots
     -   [ ] Assessment attempt
     -   [ ] Standard met
 16. create publication-quality plots using `theme` and `labs` layers
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 
 ### Data analysis
 
 17. perform simple descriptive analyses for numeric and factor data (e.g., mean, standard deviation, frequency tables)
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 18. perform simple hypothesis testing analyses for numeric and factor data (e.g., t-tests, chi-square, linear regression)
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 19. present and interpret statistics in manuscript narrative
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 
 ### BibTeX
@@ -132,7 +132,7 @@ Suggested standards for this **Cleaning Level 1** assessment are noted with an a
 
 26. execute descriptive analyses and/or hypothesis testing in code chunks
 
-    -   [ ] Assessment attempt
+    -   [x] Assessment attempt
     -   [ ] Standard met
 
 ### R Markdown and quarto/papaja
@@ -149,3 +149,14 @@ Suggested standards for this **Cleaning Level 1** assessment are noted with an a
 30. use `knitr` and quarto to produce an APA7 formatted 1-click PDF manuscript
     37. [ ] Assessment attempt
     38. [ ] Standard met
+
+# Unassessed Learning Objectives
+
+1. use frequent, informative comments in code and markdown
+2. find and understand documentation for R packages and functions
+15. recognize and interpret common data visualizations
+16. determine most appropriate visualizations and analyses for specific research questions and data
+
+Everything is listed in association with each code chunk (in terms of what objective I believe I am demonstrating with each code chunk). All of my comments are marked with two '##'. If you have any questions please let me know! 
+
+I am attempting to meet all of these marked objectives for the first time. 
