@@ -1,3 +1,18 @@
+
+
+# !!IMPORTANT UPDATE!!
+
+This is an old version of the assessment file that was pushed to this subdirectory in error.
+
+Please use the new version, which is available in the `assessment.md` file in the top-level directory of your repository. 
+
+Ordinarily I would delete this file to avoid confusion, but I'm leaving it here because I know many people have already started work and even submitted this. I am renaming it to `assessment_old.md` to avoid confusion, though I realize that is likely to cause more confusion than it alleviates. 
+
+*If you have submitted this assignment using this file, you may be asked to resubmit using the updated file. 
+
+I apologize for this confusion!!
+
+
 # Cleaning Level 1 Assigment Assessment
 
 **Do not duplicate this file.** Make your edits directly in the markdown and use version control to update with each attempt.
@@ -159,4 +174,8 @@ Suggested standards for this **Cleaning Level 1** assessment are noted with an a
 
 Everything is listed in association with each code chunk (in terms of what objective I believe I am demonstrating with each code chunk). All of my comments are marked with two '##'. If you have any questions please let me know! 
 
+<<<<<<< HEAD:01_data-cleaning/01_cleaning-level-1/assessment.md
 I am attempting to meet all of these marked objectives for the first time. 
+=======
+I am attempting to meet all of these marked objectives for the first time. 
+>>>>>>> 2c58ece81a64ce1d5b2a47ce0bbd93d5a0582644:01_data-cleaning/01_cleaning-level-1/assessment_old.md
