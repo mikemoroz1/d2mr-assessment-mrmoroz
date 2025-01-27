@@ -687,6 +687,7 @@ ggplot(unguided_data, aes(x = mpg, y = wt)) + geom_line(na.rm = FALSE, show.lege
 ## Unassessed Learning Objective #15: Recognize and interpret common data visualizations
 
 ```
+
 ```{r}
 
 #| label: Unguided Cleaning #2: 'Simple Hypothesis Testing and Presenting/Interpreting Statistics in a Manuscript Narrative '
@@ -744,13 +745,9 @@ ggplot(second_hypothesis_testing, aes(x = wt_category, y = mpg)) + geom_boxplot(
 ## Unassessed Learning Objective #16: Determine most appropriate visualizations and analyses for specific research questions and data
 
 ```
+
 A Welch two-samples t-test was conducted to assess differences in miles per gallon between Mazda (n = 2) and Merc (n = 7) car models. Mazda and Merc car models were found to not vary significantly across miles per gallon, t(6) = 1.55, p = 0.17, 95% C.I. [-1.15, 5.13]. These results provide evidence in support of the null hypothesis; that there are no significant differences between miles per gallon (mpg) group means for Mazda and Merc car models.  
 
-<<<<<<< HEAD
-=======
-A Welch two-samples t-test was conducted to assess differences in miles per gallon between Mazda (n = 2) and Merc (n = 7) car models. Mazda and Merc car models were found to not vary significantly across miles per gallon, t(6) = 1.55, p = 0.17, 95% C.I. [-1.15, 5.13]. These results provide evidence in support of the null hypothesis; that there are no significant differences between miles per gallon (mpg) group means for Mazda and Merc car models.  
-
->>>>>>> 2c58ece81a64ce1d5b2a47ce0bbd93d5a0582644
 A second Welch two-samples t-test was conducted to assess differences in miles per gallon between light (n = 6) and heavy (n = 3) cars. Light and heavy cars were found to vary significantly across miles per gallon, t(4) = -9.69, p < 0.001, 95% C.I. [11.83, 30.07]. These results provide evidence in support of the alternative hypothesis; that there are significant differences in miles per gallon (mpg) between light and heavy cars, with light cars having considerably higher miles per gallon than heavy cars. 
 
 # Submission & Assessment
