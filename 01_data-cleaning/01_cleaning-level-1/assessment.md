@@ -148,8 +148,8 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [x] Objective met
-        -   Grader comments:
+        -   [ ] Objective met
+        -   Grader comments: ND - use relative paths!! Your read/write chunk won't run for me because I don't have a /michaelmoroz/ folder on my computer.
 
 10. Use `dplyr` and `tidyr` functions to transform data 
 
@@ -480,11 +480,11 @@ I'm proud of the work I did on this mini-project. I was going to stay away from 
 
 -   Grader: Mian
 -   Date: Feb 2 2025
--   Points toward unique objectives (up to 20): 15
+-   Points toward unique objectives (up to 20): 14
 -   Additional points (up to 20): 4
 -   TA provisional engagement points (up to 10): 4
--   Final approved engagement points (up to 10):
--   Total points (up to 50): 23
+-   Final approved engagement points (up to 10): 7
+-   Total points (up to 50): 25
 
 Engagement points are awarded for going above and beyond the expectations of the project and are not guaranteed on any given submission.. Demonstrating the assessed learning objectives earns you points in those categories, but engagement points are awarded for exceptional effort, creativity, or skill.
 
@@ -493,3 +493,5 @@ TAs may recommend engagement points provisionally, but the instructor will make 
 Additional comments: 
 
 By Mian: Good job! Got many objectives met in one shot with good quality. I appreciate detailed comments to improve the readability.
+
+ND - Awesome job, Michael! Really impressed with how much above-and-beyond work you were able to put into the relatively simple project. Half your points in a single project. Not bad. :)
