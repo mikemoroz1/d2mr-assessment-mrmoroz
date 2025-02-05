@@ -494,4 +494,4 @@ Additional comments:
 
 By Mian: Good job! Got many objectives met in one shot with good quality. I appreciate detailed comments to improve the readability.
 
-ND - Awesome job, Michael! Really impressed with how much above-and-beyond work you were able to put into the relatively simple project. Half your points in a single project. Not bad. :)
+ND - Awesome job, Michael! Really impressed with how much above-and-beyond work you were able to put into the relatively simple project. Half your points in a single project. Not bad. :) Small thing, watch your chunk names. A lot of your chunks at the bottom aren't valid names and become comments half way through. Stick to lower case and hyphens, `like optional-cleaning-1`.
